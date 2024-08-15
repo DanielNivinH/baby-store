@@ -57,7 +57,7 @@ export default {
   height 215px
 
   .header__upper
-    background-image: url('@/assets/imgs/svg/Upper.svg')
+    background-image: url('@/assets/imgs/svg/Upper-background.svg')
     background-position: center
     height 51px
     padding 0 8% 15px 8%
