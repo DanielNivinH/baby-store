@@ -2,7 +2,7 @@
   <footer class="footer">
     <div class="footer__Content">
       <div class="social">
-        <img class="social__logo" src="@/assets/imgs/svg/Logo.svg" alt="logo">
+        <img class="social__logo" src="@/assets/imgs/svg/Store-Logo.svg" alt="logo">
         <p class="social__text">Nunc consequat interdum varius sit amet mattis.</p>
         <div class="social__buttons">
           <img class="social__button social__buttons--instagram" src="@/assets/imgs/svg/Instagram.svg" alt="Instagram">

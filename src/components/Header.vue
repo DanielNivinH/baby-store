@@ -12,7 +12,7 @@
   </div>
   <div class="header__lower">
     <div class="logo-container">
-      <img class="logo-container__img" src="@/assets/imgs/svg/Logo.svg" alt="">
+      <img class="logo-container__img" src="@/assets/imgs/svg/Store-Logo.svg" alt="">
     </div>
     <div class="navigation">
       <div class="navigation__options">
