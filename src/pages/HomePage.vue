@@ -1,7 +1,7 @@
 <template>
-  <div>
-   test 
-  </div>
+  <main>
+    Homepage
+  </main>
 </template>
 <script>
 export default {

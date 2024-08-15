@@ -24,6 +24,9 @@ export default {
   margin 0
   font-size 16px
 
+main
+  min-height calc(100vh - 781px)
+
 #app
   font-family Roboto, sans-serif;
   font-weight: 300;
