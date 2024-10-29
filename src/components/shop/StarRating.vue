@@ -6,8 +6,7 @@
       :class="{ filled: star <= (isHovering ? temporaryRating : rating) }"
       @mouseover="!disabled && hover(star)"
       @mouseleave="!disabled && hover(0)"
-      @click="!disabled && rate(star)"
-    >
+      @click="!disabled && rate(star)">
       ★
     </span>
   </div>
@@ -15,7 +14,7 @@
 
 <script>
 export default {
-  name: 'StarRating',
+  name: 'StarRating', 
   props: {
     value: {
       type: Number,

@@ -19,16 +19,18 @@
     </div>
   </div>
 </template>
-
 <script>
 import Product from '@/components/shop/Product.vue'
 
 export default {
-  name: 'ProductsGroup',
+  name: 'ProductsGroup', 
   components: {
     Product,
   },
   props: {
+    products: {
+      type: Array,
+    },
     currentPage: {
       type: Number,
       default: 1,
@@ -43,21 +45,22 @@ export default {
     },
   },
   computed: {
-    products() {
-      return this.$store.state.products;
-    },
     totalPages() {
-      return Math.ceil(this.products.length / this.productsPerPage);
+      return Math.ceil(this.products.length / this.productsPerPage)
     },
     paginatedProducts() {
-      const start = (this.currentPage - 1) * this.productsPerPage;
-      const end = start + this.productsPerPage;
-      return this.products.slice(start, end);
+      const start = (this.currentPage - 1) * this.productsPerPage
+      const end = start + this.productsPerPage
+      return this.products.slice(start, end)
     },
   },
   methods: {
     updateCurrentPage(page) {
-      this.$emit('update:currentPage', page);
+      this.$emit('update:currentPage', page)
+      window.scrollTo({
+        top: 250,
+        behavior: 'smooth'
+      })
     },
   },
 };

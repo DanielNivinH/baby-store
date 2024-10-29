@@ -5,7 +5,10 @@
         <div class="availability">SALE</div>
         <div class="add">
           <img class="add__wishlist" src="@/assets/imgs/svg/Heart.svg" @contextmenu.prevent @dragstart.prevent/>
-          <img class="add__cart" src="@/assets/imgs/svg/Cart-2.svg" @contextmenu.prevent @dragstart.prevent/>
+          <img class="add__cart" src="@/assets/imgs/svg/Cart-2.svg" 
+          @contextmenu.prevent
+          @dragstart.prevent
+          @click="addToCart(product.id)"/>
         </div>
       </div>
       <img class="product-heading__img" @click="goToProductPage(product.id)" :src="getProductImg()" 
@@ -39,11 +42,19 @@ export default {
     }
   },
   methods: {
+    goToCart(){
+      this.$router.push({ name: 'myCart' })
+    },
     getProductImg(){
       return require(`@/assets/imgs/png/products/${this.product.id}.png`)
     },
     goToProductPage(productId) {
       this.$router.push(`/product/${productId}`)
+    },
+    addToCart(productId){
+      this.goToCart()
+      const quantity = 1
+      this.$store.dispatch('addToCart', {productId, quantity})
     }
   },
 }

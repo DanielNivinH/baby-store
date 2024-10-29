@@ -5,15 +5,13 @@
         <img class="pictures-principal__fullscreen" src="@/assets/imgs/svg/Fullscreen.svg">
         <img class="pictures-principal__img" :src="getProductImg()"/>
       </div>
-      <div class="pictures-secondary">
-          <img class="picture-secondary pictures-secondary--first" :src="getProductImg()">
-          <img class="picture-secondary pictures-secondary--second" :src="getProductImg()">
-          <img class="picture-secondary pictures-secondary--third" :src="getProductImg()">
+      <div class="pictures-secondary" v-if="false">
+          <img class="picture-secondary" :src="getProductImg()">
       </div>
     </div>
     <div class="product-info">
       <div class="product-info__heading">{{ product.name }}</div>
-      <div class="product-info__price">${{product.price}}.00</div>
+      <div class="product-info__price">${{ product.price }}.00</div>
       <div class="product-rating">
         <star-rating class="product-rating__stars" 
           v-model="rating" 
@@ -29,15 +27,17 @@
         <img class="product-share__img" src="@/assets/imgs/svg/Pinterest-gray.svg">
       </div>
       <div class="product-options">
-        <QuantitySelector class="product-options__quantity"/>
-        <button class="product-options__add" @click="addToCart(product.id)"><img src="@/assets/imgs/svg/Cart-white.svg">Add to cart</button>
+        <QuantitySelector class="product-options__quantity"
+        :quantity="this.quantity" 
+        @update-quantity="updateQuantity($event)"/>
+        <button class="product-options__add" @click="addToCart(product.id, quantity)"><img src="@/assets/imgs/svg/Cart-white.svg">Add to cart</button>
         <button class="product-options__favorites"><img src="@/assets/imgs/svg/Heart.svg"></button>
       </div>
       <div class="product-info">
         <div class="product-info__heading">Short description</div>
         <div class="info-container">
-          <div class="info-container__sku">SKU: {{ product.rating }}</div>
-          <div class="info-container__category">Category: {{ product.category }} </div>
+          <div class="info-container__sku">Code: {{ product.id }}</div>
+          <div class="info-container__category">category: {{ product.category[0] }} {{ GotMultipleCategories(product.category[1]) }} {{ product.category[1] }} </div>
         </div>
       </div>
       <div class="product-cards">
@@ -65,7 +65,8 @@ export default {
   },
   data() {
     return {
-      rating: 0
+      rating: 0,
+      quantity: 1
     }
   },
   computed: {
@@ -74,13 +75,25 @@ export default {
     }
   },
   methods: {
+    GotMultipleCategories(otherCategory){
+      const categoryConection = 'and'
+      if (otherCategory) {
+        return categoryConection
+      }
+    },
+    goToCart(){
+      this.$router.push({ name: 'myCart' })
+    },
+    updateQuantity(newQuantity) {
+      this.quantity = newQuantity
+    },
     getProductImg() {
       return require(`@/assets/imgs/png/products/${this.product.id}.png`)
     },
-    addToCart(productId) {
-      alert('Product added!')
-      this.$store.dispatch('addToCart', productId)
-    }
+    addToCart(productId, quantity) {
+      this.goToCart()
+      this.$store.dispatch('addToCart', {productId, quantity})
+    },
   },
   mounted() {
     if (this.product) {

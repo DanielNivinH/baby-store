@@ -2,32 +2,39 @@
 <header class="header">
   <div class="header__upper">
     <div class="shipping">
-      <img class="shipping__icon" src="@/assets/imgs/svg/Shipping.svg" @contextmenu.prevent @dragstart.prevent>
+      <img class="shipping__icon" src="@/assets/imgs/svg/Shipping.svg" 
+      @contextmenu.prevent 
+      @dragstart.prevent>
       <p class="shipping__text">Free shipping with over $150</p>
     </div>
-    <div class="account">
-      <div class="account__login">Login</div>
-      <div class="account__register">Register</div>
+    <div v-if="!this.currentUser" class="account">
+      <div class="account__login" @click="goToLogin">Login</div>
+      <div class="account__register" @click="goToRegister">Register</div>
+    </div>
+    <div v-else class="account-registered">
+      <div class="account-registered__logout" @click="logoutUser">Logout</div>
+      <div class="account-registered__user">{{ this.currentUser.username }}</div>
     </div>
   </div>
   <div class="header__lower">
     <div class="logo-container">
-      <img class="logo-container__img" src="@/assets/imgs/svg/Store-Logo.svg" @contextmenu.prevent @dragstart.prevent>
+      <img class="logo-container__img" src="@/assets/imgs/svg/Store-Logo.svg" 
+      @contextmenu.prevent 
+      @dragstart.prevent
+      @click="goToHome">
     </div>
     <div class="navigation">
       <div class="navigation__options">
         <div class="navigation__option navigation__options--home" @click="goToHome">Home</div>
         <div class="navigation__option navigation__options--shop" @click="goToShop">Shop</div>
-        <div class="navigation__option navigation__options--contact">Pages</div>
-        <div class="navigation__option navigation__options--contact">Blog</div>
-        <div class="navigation__option navigation__options--contact">Contact</div>
+        <div class="navigation__option navigation__options--contact" @click="goToContact">Contact</div>
       </div>
       <button class="navigation__button" @click="openNavigationModal">
         <img class="button__img" src="@/assets/imgs/svg/Menu.svg">
       </button>
       <div class="navigation__search">
         <div class="cart" @contextmenu.prevent @dragstart.prevent>
-          <img @click="goToCart()" class="cart__icon" src="@/assets/imgs/svg/Cart.svg" alt="">
+          <img @click="goToCart" class="cart__icon" src="@/assets/imgs/svg/Cart.svg" alt="">
           <div v-if="totalItems" class="cart__alert">{{ totalItems }}</div>
         </div>
         <SearchBar/>
@@ -52,6 +59,9 @@ export default {
     }
   },
   computed: {
+    currentUser() {
+      return this.$store.state.currentUser
+    },
     cart() {
       return this.$store.state.cart
     },
@@ -69,9 +79,22 @@ export default {
     goToCart(){
       this.$router.push({ name: 'myCart' })
     },
+    goToLogin(){
+      this.$router.push({ name: 'Login' })
+    },
+    goToRegister(){
+      this.$router.push({ name: 'Register' })
+    },
+    goToContact(){
+      this.$router.push({ name: 'Contact' })
+    },
     openNavigationModal(){
       this.$refs.navigationModal.openModal()
-    }
+    },
+    logoutUser() {
+        this.$store.dispatch('logoutUser')
+        alert('Logout successful');
+    },
   },
 }
 
@@ -109,6 +132,20 @@ export default {
         cursor pointer
 
       .account__register
+        color white
+        cursor pointer
+
+    .account-registered
+      width 16vw
+      display flex
+      min-width 125px
+      justify-content space-between
+
+      .account-registered__logout
+        color white
+        cursor pointer
+
+      .account-registered__user
         color white
         cursor pointer
 
@@ -150,15 +187,16 @@ export default {
           position relative
 
           .cart__alert
-            top -12px
-            right -15px
+            top -6px
+            right -12px
             position absolute
-            width 25px
-            height 25px
-            background-color #fe4900
+            width 20px
+            height 20px
+            background-color #E3B110
             border-radius 50px
             color white
             text-align center
+            line-height 27px
 
 @media (max-width: 980px)
   .header
@@ -296,8 +334,8 @@ export default {
           height 60px
 
           .button__img
-            width 100%
-            height 100%
+            width 70%
+            height 70%
 
         .navigation__search
           display flex

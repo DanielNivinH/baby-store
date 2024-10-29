@@ -5,6 +5,9 @@ import Home from '@/pages/HomePage.vue';
 import Shop from '@/pages/ShopPage.vue';
 import Product from '@/pages/ProductPage.vue';
 import Cart from '@/pages/CartPage.vue';
+import Login from '@/pages/LoginPage.vue';
+import Register from '@/pages/RegisterPage.vue';
+import Contact from '@/pages/ContactPage.vue';
 
 Vue.use(Router);
 
@@ -18,7 +21,7 @@ export default new Router({
       component: Home
     },
     {
-      path: '/products',
+      path: '/products:filter?',
       name: 'Shop',
       component: Shop
     },
@@ -31,6 +34,21 @@ export default new Router({
       path: '/myCart',
       name: 'myCart',
       component: Cart
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: Register
+    },
+    {
+      path: '/contact',
+      name: 'Contact',
+      component: Contact
     },
     {
       path: '*',

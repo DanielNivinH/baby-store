@@ -1,7 +1,7 @@
 <template>
     <div class="container" @click="closeModal" v-if="showNavigationModal">
         <div class="container__modal" @click.stop>
-          <div class="modal-heading"/>
+          <div v-if="showHeading" class="modal-heading"/>
           <slot/>
         </div>
     </div>
@@ -9,12 +9,16 @@
 <script>
   export default {
     name: 'LateralModal',
+    props: {
+      showHeading: {
+        type: Boolean,
+        default: true
+      }
+    },
     data() {
       return {
         showNavigationModal: false,
       }
-    },
-    computed: {
     },
     methods: {
       closeModal(){
@@ -23,7 +27,7 @@
       openModal(){
         this.showNavigationModal = true
       },
-    },
+    }
   }
 </script>
 <style scoped lang="stylus">
@@ -43,17 +47,16 @@
     height 100%
     box-shadow 1px 0px 20px gray
     display flex
-    max-width 720px
+    max-width 320px
     align-items center
     flex-direction column
-    transform translateX(-100%)
-    opacity 0
 
     .modal-heading
       width 100%
       height 51px
       background-image url('@/assets/imgs/svg/Upper-background.svg')
-      background-repeat: repeat no-repeat;
-      background-position: top center;
-      background-attachment: fixed;
+      background-repeat repeat no-repeat
+      background-position top center
+      background-attachment fixed
+      margin 0 0 20px 0
 </style>

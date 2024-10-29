@@ -2,26 +2,10 @@
   <div class="filter">
     <div class="categories">
       <div class="categories__heading">Product categories</div>
-      <div class="categorie">
-        <img class="categorie__img" src="@/assets/imgs/svg/Plus.svg">
-        <div class="categorie__text">Playsets</div>
-      </div>
-      <div class="categorie">
-        <img class="categorie__img" src="@/assets/imgs/svg/Plus.svg">
-        <div class="categorie__text">Control Toys</div>
-      </div>
-      <div class="categorie">
-        <img class="categorie__img" src="@/assets/imgs/svg/Plus.svg">
-        <div class="categorie__text">Educational Toys</div>
-      </div>
-      <div class="categorie">
-        <img class="categorie__img" src="@/assets/imgs/svg/Plus.svg">
-        <div class="categorie__text">Eco-Frienly Toys</div>
-      </div>
-      <div class="categorie">
-        <img class="categorie__img" src="@/assets/imgs/svg/Plus.svg">
-        <div class="categorie__text">Stuffed Toys</div>
-      </div>
+      <ProductFilterCategories
+      ref="FilterCategories"
+      :productCategories="productCategories"
+      @set-filters="setFilters"/>
     </div>
     <div class="price">
       <div class="price__heading">Filter by price</div>
@@ -38,42 +22,52 @@
         class="slider"
         ></vue-slider>
         <div class="price__apply">
-          <button class="apply__button" @click="applyFilter">Apply</button>
+          <button class="apply__button" @click="setPriceFilters()">Apply</button>
         </div>
       </div>
   </div>
 </template>
 <script>
+import ProductFilterCategories from '@/components/navigation/ProductFilterCategories.vue'
 import VueSlider from 'vue-slider-component'
 import 'vue-slider-component/theme/default.css'
 export default {
   name: 'ProductFilter',
   components: {
-    VueSlider
+    VueSlider,
+    ProductFilterCategories
+  },
+  props: {
+    productCategories: {
+      type: Array,
+    },
   },
   data() {
     return {
-      price: [20, 200],
-      minPrice: 20,
-      maxPrice: 200,
+      price: [5, 100],
+      minPrice: 5,
+      maxPrice: 100,
+    }
+  },
+  computed: {
+    marks() {
+      return {
+        [this.minPrice]: '$5.00',
+        [this.maxPrice]: '$100.00'
+      }
     }
   },
   methods: {
     formatter(value) {
       return `$${value.toFixed(2)}`
     },
-    applyFilter() {
-      console.log(`Filter applied: ${this.price[0]} - ${this.price[1]}`)
-    }
+    setFilters(filter) {
+      this.$emit('set-filters', filter)
+    },
+    setPriceFilters() {
+      this.$emit('set-price-filters', this.price)
+    },
   },
-  computed: {
-    marks() {
-      return {
-        [this.minPrice]: '$20.00',
-        [this.maxPrice]: '$200.00'
-      }
-    }
-  }
 }
 </script>
 <style scoped lang="stylus">
@@ -87,12 +81,6 @@ export default {
     .categories__heading
       font-size 20px
       font-weight bold
-
-    .categorie
-      display flex
-
-      .categorie__img
-        padding 0 5px 0 0
 
   .price
     border-radius 10px
