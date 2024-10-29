@@ -23,12 +23,17 @@ export default {
   box-sizing border-box
   margin 0
   font-size 16px
+  user-select: none
+
+button
+  cursor pointer
 
 main
-  min-height calc(100vh - 781px)
+  min-height: calc(100vh - 215px - (100vw / 2.54))
 
 #app
-  font-family Roboto, sans-serif;
+  position relative
+  font-family Baloo Bhaina, sans-serif
   font-weight: 300;
-
+  min-width 740px
 </style>
