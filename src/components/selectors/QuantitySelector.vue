@@ -31,32 +31,36 @@ export default {
 </script>
 <style scoped lang="stylus">
 .selector-container
+  width 100%
+  height 30px
   border 2px solid #0F83B2
-  width 120px
-  height 45px
   display flex
   justify-content space-between
   border-radius 10px
 
   .selector-container__minus
     border none
-    width 30%
+    width 100%
     background-color white
     border-radius 10px
-    font-size 26px
+    font-size clamp(12px, 3vw, 14px)
+    padding 0
 
   .selector-container__number
     border none
-    width 40%
+    width 100%
     background-color white
     font-weight 700
-    border-left: 2px solid #0F83B2
-    border-right: 2px solid #0F83B2
+    font-size clamp(12px, 3vw, 14px)
+    border-left 2px solid #0F83B2
+    border-right 2px solid #0F83B2
+    padding 0
 
   .selector-container__plus
-    font-size 20px
+    font-size clamp(12px, 3vw, 14px)
     border none
-    width 30%
+    width 100%
     background-color white
     border-radius 10px
+    padding 0
 </style>

@@ -9,11 +9,14 @@
   display flex
   height 45px
   position relative
+  width 90%
+  max-width 320px
 
   .search__input
     border-radius 26px
     border 2px solid #D4D4D4
     height 100%
+    width 100%
     padding 0 0 0 20px
 
   .search__button

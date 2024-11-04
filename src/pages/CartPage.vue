@@ -107,6 +107,7 @@ export default {
 .main
   margin 0 auto
   width 90%
+  max-width 1080px
 
   .main__heading
     font-size 24px
@@ -118,9 +119,11 @@ export default {
 
     .cart__sections
       background-color #EAEAEA
+      border-top-left-radius 10px
+      border-top-right-radius 10px
       display grid
       align-items center 
-      grid-template-columns 3fr 1fr 1fr 1fr 1fr
+      grid-template-columns 3fr repeat(4, 1fr)
     
       .section
         text-align center
@@ -132,7 +135,7 @@ export default {
     .cart-product
       display grid
       height 160px
-      grid-template-columns 3fr 1fr 1fr 1fr 1fr       
+      grid-template-columns 3fr repeat(4, 1fr)       
       align-items center 
       border-bottom 2px solid #EAEAEA 
 
@@ -152,19 +155,21 @@ export default {
 
       .cart-product__quantity
         margin 0 auto
+        width 80%
 
       .cart-product__subtotal
         text-align center
 
       .cart-product__remove
         margin 0 auto
+        height 25px
         cursor pointer
 
   .empty-cart      
     padding 5% 0 5% 0
     text-align center
     font-weight 700
-    font-size 24px
+    font-size clamp(14px, 5vw, 18px)
     color gray
     height 100%
     border-bottom 2px solid lightgray
@@ -179,6 +184,7 @@ export default {
       background-color lightgray
       border none
       width 200px
+      font-size clamp(12px, 3vw, 14px)
       height 35px
       border-radius 10px
 
@@ -224,12 +230,74 @@ export default {
         width 100%
         height 60px
         font-weight bold
+        font-size clamp(12px, 3vw, 14px )
         border-radius 10px
         border none
         margin 0 0 20px 0
 
 @media (max-width: 820px)
   .main
+
+    .main__heading
+      font-size 24px
+      font-weight 700
+
+    .cart
+      width 100%
+      margin 0 0 20px 0
+
+      .cart__sections
+        background-color #EAEAEA
+        border-top-left-radius 10px
+        border-top-right-radius 10px
+        display grid
+        align-items center 
+        grid-template-columns 2fr repeat(4, 1fr)
+      
+        .section
+          text-align center
+
+        .cart__sections--product
+          text-align initial
+          padding 0 0 0 10px
+
+      .cart-product
+        display grid
+        height 160px
+        grid-template-columns 2fr repeat(4, 1fr)     
+        align-items center 
+        border-bottom 2px solid #EAEAEA 
+
+        .product-item
+          display flex
+          flex-direction column
+          padding 0 0 0 10px
+          align-items center
+
+          .product-item__img
+            width 50%
+            min-width 60px
+            min-height 60px
+            max-width 80px
+            max-height 80px
+
+          .product-item__name
+            padding 0 0 0 20px
+            font-size clamp(12px, 2vw, 18px)
+
+        .cart-product__price
+          text-align center
+
+        .cart-product__quantity
+          margin 0 auto
+          width 80%
+
+        .cart-product__subtotal
+          text-align center
+
+        .cart-product__remove
+          margin 0 auto
+          cursor pointer
 
     .options
       display flex

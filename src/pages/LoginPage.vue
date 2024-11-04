@@ -1,7 +1,7 @@
 <template>
   <main class="main">
+    <Roots/>
     <div class="login">
-      <Roots/>
       <div class="login-container">
         <div class="login-container__heading">Login with your account</div>
         <input class="login-container__email" type="text" placeholder="email" v-model="email">
@@ -49,19 +49,21 @@ export default {
 </script>
 <style scoped lang="stylus">
 .main 
-  width 100%
+  width 90%
+  max-width 1080px
+  margin 0 auto
 
   .login
-    width 90%
-    margin 0 auto
-    height 400px
+    width 100%
+    display flex
+    justify-content center
+    padding 0 0 10% 0
 
     .login-container
       padding 20px 0 0 0
-      width 35%
-      margin 0 auto
       display grid
-      grid-template-row 1fr 1fr 1fr 1fr
+      max-width 500px
+      grid-template-row repeat(4, 1fr)
       gap 10px
 
       .login-container__heading
