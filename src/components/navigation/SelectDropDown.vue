@@ -50,7 +50,11 @@ export default {
 
   .dropdown-button
     display grid
+    align-items center
     grid-template-columns 1fr 1fr
+
+    .dropdown-button__name 
+      line-height 1.2
 
     .dropdown-button__arrow
       width 30px

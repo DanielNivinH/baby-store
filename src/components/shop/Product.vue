@@ -74,14 +74,18 @@ export default {
       display flex
       width 100%
       justify-content space-between
-      padding 0 20px 0 10px
+      padding 0 6% 0 5%
 
       .availability
         background-color #F27373
         color white
         border-radius 20px
-        width 60px
-        height 25px
+        width 10vw
+        height 100%
+        max-width 60px
+        max-height 25px
+        min-width 40px
+        font-size clamp(8px, 4vw, 14px)
         text-align center
 
       .add
@@ -109,12 +113,13 @@ export default {
     .product-view__name
       cursor pointer
       font-weight 500
-      font-size 18px
+      font-size clamp(14px, 3vw, 16px)
+      line-height 1.2
 
     .product-view__price
       color #1BBF00
       font-weight 700
-      font-size 20px
+      font-size clamp(14px, 3vw, 18px)
       height 28px
 
 .product:hover

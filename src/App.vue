@@ -29,11 +29,16 @@ button
   cursor pointer
 
 main
-  min-height: calc(100vh - 215px - (100vw / 2.54))
+  flex-grow 1
 
 #app
+  display flex
+  flex-direction column
+  width 100%
+  height 100%
+  min-height 100vh
+  min-width 320px
   position relative
-  font-family Baloo Bhaina, sans-serif
-  font-weight: 300;
-  min-width 740px
+  font-family 'Baloo Bhaina', sans-serif
+  font-weight 300
 </style>

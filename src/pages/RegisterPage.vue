@@ -1,7 +1,7 @@
 <template>
   <main class="main">
+    <Roots/>
     <div class="register">
-      <Roots/>
       <div class="register-container">
         <div class="register-container__heading">Create a new account</div>
         <input class="register-container__email" type="text" placeholder="new username" v-model="username">
@@ -58,19 +58,21 @@ export default {
 </script>
 <style scoped lang="stylus">
 .main 
-  width 100%
+  width 90%
+  max-width 1080px
+  margin 0 auto
 
   .register
-    width 90%
-    margin 0 auto
-    height 400px
+    width 100%
+    display flex
+    justify-content center
+    padding 0 0 10% 0
 
     .register-container
       padding 20px 0 0 0
-      width 35%
-      margin 0 auto
       display grid
-      grid-template-row 1fr 1fr 1fr 1fr
+      max-width 500px
+      grid-template-row repeat(4, 1fr)
       gap 10px
 
       .register-container__heading
