@@ -1,6 +1,6 @@
 <template>
   <main class="main">
-    <Roots/>
+    <Roots />
     <div class="main__heading">Your Cart</div>
     <div v-if="cart.length > 0" class="cart">
       <div class="cart__sections">
@@ -10,22 +10,26 @@
         <div class="section cart__sections--subtotal">Subtotal</div>
         <div class="section cart__sections--action">Action</div>
       </div>
-      <div class="cart-product" 
-        v-for="product in cart" 
-        :key="product.id">
+      <div class="cart-product" v-for="product in cart" :key="product.id">
         <div class="product-item">
-          <img class="product-item__img" :src="getProductImg(product)">
+          <img class="product-item__img" :src="getProductImg(product)" />
           <div class="product-item__name">{{ product.name }}</div>
         </div>
         <div class="cart-product__price">${{ product.price }}.00</div>
         <div class="cart-product__quantity">
           <QuantitySelector
-            :quantity="product.quantity" 
-            @update-quantity="updateQuantity(product.id, $event)"/>
+            :quantity="product.quantity"
+            @update-quantity="updateQuantity(product.id, $event)"
+          />
         </div>
-        <div class="cart-product__subtotal">${{productSubtotal(product.quantity, product.price)}}.00</div>
+        <div class="cart-product__subtotal">
+          ${{ productSubtotal(product.quantity, product.price) }}.00
+        </div>
         <div class="cart-product__remove">
-          <img @click="removeFromCart(product.id)" src="@/assets/imgs/svg/Cross.svg">
+          <img
+            @click="removeFromCart(product.id)"
+            src="@/assets/imgs/svg/Cross.svg"
+          />
         </div>
       </div>
     </div>
@@ -33,8 +37,12 @@
       oh! it looks like you don't have any product added jet...
     </div>
     <div class="options">
-      <button class="option options__continue-shopping" @click="goToShop()">Continue Shopping</button>
-      <button class="option options__update-card" @click="clearAllFromCart()">Clear Cart</button>
+      <button class="option options__continue-shopping" @click="goToShop()">
+        Continue Shopping
+      </button>
+      <button class="option options__update-card" @click="clearAllFromCart()">
+        Clear Cart
+      </button>
     </div>
     <div class="checkout">
       <div class="calculated-price">
@@ -45,7 +53,13 @@
         </div>
         <div class="total">
           <div class="total__text">Total</div>
-          <div class="total__cost">${{ productTotalPrice > 0 && productTotalPrice < 150 ? productTotalPrice + 20 : productTotalPrice }}.00</div>
+          <div class="total__cost">
+            ${{
+              productTotalPrice > 0 && productTotalPrice < 150
+                ? productTotalPrice + 20
+                : productTotalPrice
+            }}.00
+          </div>
         </div>
         <button class="calculated-price__checkout">Procced to checkout</button>
       </div>
@@ -53,55 +67,53 @@
   </main>
 </template>
 <script>
-import QuantitySelector from '@/components/selectors/QuantitySelector.vue'
-import Roots from '@/components/navigation/Roots.vue'
+import QuantitySelector from "@/components/selectors/QuantitySelector.vue";
+import Roots from "@/components/navigation/Roots.vue";
 export default {
-  name: 'CartPage',
+  name: "CartPage",
   components: {
     Roots,
-    QuantitySelector
+    QuantitySelector,
   },
   data() {
-    return {
-    }
+    return {};
   },
   computed: {
     cart() {
-      return this.$store.state.cart
+      return this.$store.state.cart;
     },
     productTotalPrice() {
       return this.cart.reduce((total, product) => {
-        return total + (product.price * product.quantity)
-      }, 0)
+        return total + product.price * product.quantity;
+      }, 0);
     },
   },
   methods: {
-    goToShop(){
-      this.$router.push({ name: 'Shop' })
+    goToShop() {
+      this.$router.push({ name: "Shop" });
       window.scrollTo({
         top: 0,
-      })
+      });
     },
     removeFromCart(productId) {
-      alert('Product Deleted!')
-      this.$store.dispatch('removeFromCart', productId);
+      alert("Product Deleted!");
+      this.$store.dispatch("removeFromCart", productId);
     },
     getProductImg(product) {
-      return require(`@/assets/imgs/png/products/${product.id}.png`)
+      return require(`@/assets/imgs/png/products/${product.id}.png`);
     },
     updateQuantity(productId, newQuantity) {
-      this.$store.dispatch('updateProductQuantity', { productId, newQuantity })
+      this.$store.dispatch("updateProductQuantity", { productId, newQuantity });
     },
-    clearAllFromCart(){
-      this.$store.dispatch('clearAllFromCart')
+    clearAllFromCart() {
+      this.$store.dispatch("clearAllFromCart");
     },
     productSubtotal(quatity, price) {
-      const productSubtotal = quatity * price
-      return productSubtotal
+      const productSubtotal = quatity * price;
+      return productSubtotal;
     },
   },
-}
-
+};
 </script>
 <style scoped lang="stylus">
 .main
@@ -122,9 +134,9 @@ export default {
       border-top-left-radius 10px
       border-top-right-radius 10px
       display grid
-      align-items center 
+      align-items center
       grid-template-columns 3fr repeat(4, 1fr)
-    
+
       .section
         text-align center
 
@@ -135,9 +147,9 @@ export default {
     .cart-product
       display grid
       height 160px
-      grid-template-columns 3fr repeat(4, 1fr)       
-      align-items center 
-      border-bottom 2px solid #EAEAEA 
+      grid-template-columns 3fr repeat(4, 1fr)
+      align-items center
+      border-bottom 2px solid #EAEAEA
 
       .product-item
         display flex
@@ -146,7 +158,7 @@ export default {
 
         .product-item__img
           width 140px
-      
+
         .product-item__name
           padding 0 0 0 20px
 
@@ -165,7 +177,7 @@ export default {
         height 25px
         cursor pointer
 
-  .empty-cart      
+  .empty-cart
     padding 5% 0 5% 0
     text-align center
     font-weight 700
@@ -251,9 +263,9 @@ export default {
         border-top-left-radius 10px
         border-top-right-radius 10px
         display grid
-        align-items center 
+        align-items center
         grid-template-columns 2fr repeat(4, 1fr)
-      
+
         .section
           text-align center
 
@@ -264,9 +276,9 @@ export default {
       .cart-product
         display grid
         height 160px
-        grid-template-columns 2fr repeat(4, 1fr)     
-        align-items center 
-        border-bottom 2px solid #EAEAEA 
+        grid-template-columns 2fr repeat(4, 1fr)
+        align-items center
+        border-bottom 2px solid #EAEAEA
 
         .product-item
           display flex
@@ -322,5 +334,4 @@ export default {
         border 2px solid lightgray
         border-radius 10px
         padding 10px 2% 0 2%
-
 </style>

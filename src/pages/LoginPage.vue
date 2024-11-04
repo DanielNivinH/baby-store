@@ -1,54 +1,68 @@
 <template>
   <main class="main">
-    <Roots/>
+    <Roots />
     <div class="login">
       <div class="login-container">
         <div class="login-container__heading">Login with your account</div>
-        <input class="login-container__email" type="text" placeholder="email" v-model="email">
-        <input class="login-container__password" type="text" placeholder="password" v-model="password">
-        <button class="login-container__submit" @click="loginUser">login</button>
-        <button class="login-container__register" @click="goToRegister">You dont have an account? register here</button>
+        <input
+          class="login-container__email"
+          type="text"
+          placeholder="email"
+          v-model="email"
+        />
+        <input
+          class="login-container__password"
+          type="text"
+          placeholder="password"
+          v-model="password"
+        />
+        <button class="login-container__submit" @click="loginUser">
+          login
+        </button>
+        <button class="login-container__register" @click="goToRegister">
+          You dont have an account? register here
+        </button>
       </div>
     </div>
   </main>
 </template>
 <script>
-import Roots from '@/components/navigation/Roots.vue'
+import Roots from "@/components/navigation/Roots.vue";
 export default {
-  name: 'LoginPage',
+  name: "LoginPage",
   components: {
-    Roots
+    Roots,
   },
   data() {
     return {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
     };
   },
   methods: {
-    goToHome(){
-      this.$router.push({ name: 'Home' })
+    goToHome() {
+      this.$router.push({ name: "Home" });
     },
     loginUser() {
       try {
-        this.$store.dispatch('loginUser', {
+        this.$store.dispatch("loginUser", {
           email: this.email,
-          password: this.password
+          password: this.password,
         });
-        alert('Login successful');
-        this.goToHome()
+        alert("Login successful");
+        this.goToHome();
       } catch (error) {
         alert(error.message);
       }
     },
-    goToRegister(){
-      this.$router.push({ name: 'Register' })
+    goToRegister() {
+      this.$router.push({ name: "Register" });
     },
-  }
-}
+  },
+};
 </script>
 <style scoped lang="stylus">
-.main 
+.main
   width 90%
   max-width 1080px
   margin 0 auto
@@ -70,7 +84,7 @@ export default {
         font-size 20px
         font-weight bold
         height 30px
-      
+
       .login-container__email
         border-radius 5px
         height 30px

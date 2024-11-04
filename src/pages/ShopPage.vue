@@ -198,7 +198,7 @@ export default {
           .settings__filter
             width 32px
             display none
-          
+
         .products-settings__shown
           line-height: 1.2
 
